@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+Dir.chdir File.expand_path('../../', __FILE__) do
+  `sidekiq -q event -r ./lib/rack_active_job_sample.rb -P /var/run/rack_active_job_sample_worker.pid -L /var/log/rack_active_job_sample_worker.log -d`
+end

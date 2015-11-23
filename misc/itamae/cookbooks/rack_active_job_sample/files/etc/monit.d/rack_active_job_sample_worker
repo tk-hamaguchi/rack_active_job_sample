@@ -1,0 +1,4 @@
+check process rack_active_job_sample_worker with pidfile "/var/run/rack_active_job_sample_worker.pid"
+    start program = "rack_active_job_sample_worker"
+    stop program = "kill `cat /var/run/rack_active_job_sample_worker.pid`"
+

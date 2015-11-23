@@ -1,0 +1,26 @@
+check system $HOST
+  if loadavg (1min) > 4 then alert
+  if loadavg (5min) > 2 then alert
+  if cpu usage > 95% for 10 cycles then alert
+  if memory usage > 75% then alert
+  if swap usage > 25% then alert
+
+<%- @network.each do |i| -%>
+check network <%= i %> with interface <%= i %>
+  if failed link then alert
+  if changed link then alert
+  if saturation > 90% then alert
+  if download > 10 MB/s then alert
+  if total upload > 1 GB in last hour then alert
+
+<%- end -%>
+
+<%- @filesystem.each do |(k,v)| -%>
+check filesystem <%= k %> with path <%= v %>
+  if space usage > 80% for 5 times within 15 cycles then alert
+  if space usage > 99% then stop
+  if inode usage > 30000 then alert
+  if inode usage > 99% then stop
+  group disk
+
+<%- end -%>

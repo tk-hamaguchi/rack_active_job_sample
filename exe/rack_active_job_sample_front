@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+Dir.chdir File.expand_path('../../', __FILE__) do
+  exec 'rackup -o 0.0.0.0 -P /var/run/rack_active_job_sample_front.pid'
+end
